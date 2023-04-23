@@ -2,7 +2,7 @@
 """ Place Module for HBNB project
     Add Sqlalchemy to get backend
 """
-from models.base_model import BaseModel
+from models.base_model import BaseModel, Base
 from sqlalchemy import String, Column, ForeignKey, Integer, Float, Table
 import os
 from sqlalchemy.orm import relationship
@@ -16,7 +16,7 @@ place_amenity = Table(
             'place_id', String(60), ForeignKey('places.id'),
             nullable=False, primary_key=True),
         Column(
-            'amenity_id', String(60) ForeignKey('amenities.id'),
+            'amenity_id', String(60), ForeignKey('amenities.id'),
             nullable=False, primary_key=True)
 )
 
