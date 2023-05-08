@@ -8,6 +8,7 @@ from datetime import datetime
 env.hosts = ['localhost']
 env.user = 'your_username'
 
+
 def do_pack():
     """Generate a .tgz archive from the contents of the web_static folder."""
 
@@ -21,4 +22,3 @@ def do_pack():
     if result.failed:
         return None
     return archive_path
-
