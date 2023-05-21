@@ -16,10 +16,12 @@ def hbnb():
     """Displays a string at /hbnb route"""
     return 'HBNB'
 
+
 @app.route('/c/<text>', strict_slashes=False)
 def c_text(text):
     """Displays C followed by the value of text"""
-    return 'C %s' % text.replace('_', ' ')
+    text = text.replace("_", " ")
+    return "C {}".format(text)
 
 
 if __name__ == "__main__":
