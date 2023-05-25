@@ -1,24 +1,21 @@
 #!/usr/bin/python3
-"""Fabric script that generates a .tg archive from the contents of the
-    web statics folder. ChatGPT generated code"""
+'''Fabric script to generate .tgz archive'''
 
-from fabric.api import local, env, run
+from fabric.api import local
 from datetime import datetime
 
-env.hosts = ['localhost']
-env.user = 'your_username'
+from fabric.decorators import runs_once
 
 
+@runs_once
 def do_pack():
-    """Generate a .tgz archive from the contents of the web_static folder."""
+    '''generates .tgz archive from the contents of the web_static folder'''
+    local("mkdir -p versions")
+    path = ("versions/web_static_{}.tgz"
+            .format(datetime.strftime(datetime.now(), "%Y%m%d%H%M%S")))
+    result = local("tar -cvzf {} web_static"
+                   .format(path))
 
-    now = datetime.now()
-    timestamp = now.strftime('%Y%m%d%H%M%S')
-    archive_path = 'versions/web_static_{}.tgz'.format(timestamp)
-
-    local('mkdir -p versions')
-
-    result = local('tar -czvf {} web_static'.format(archive_path))
     if result.failed:
         return None
-    return archive_path
+    return path

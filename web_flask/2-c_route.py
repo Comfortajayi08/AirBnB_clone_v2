@@ -1,28 +1,33 @@
 #!/usr/bin/python3
-"""Script that starts a Flask web application"""
-
+"""Starts Flask web app
+Routes:
+    / - display "Hello HBNB!"
+    /hbnb - display "HBNB"
+    /c/<text> - display "C <text>"
+"""
 from flask import Flask
+
 app = Flask(__name__)
 
 
 @app.route('/', strict_slashes=False)
-def hello_hbnb():
-    """Returns a string at the root route"""
-    return 'Hello HBNB!'
+def hbnb_route():
+    """prints Hello HBNB"""
+    return "Hello HBNB!"
 
 
 @app.route('/hbnb', strict_slashes=False)
 def hbnb():
-    """Displays a string at /hbnb route"""
-    return 'HBNB'
+    """prints HBNB"""
+    return "HBNB"
 
 
-@app.route('/c/<text>', strict_slashes=False)
+@app.route('/c/<string:text>', strict_slashes=False)
 def c_text(text):
-    """Displays C followed by the value of text"""
+    """prints C followed by <text> content"""
     text = text.replace("_", " ")
-    return "C {}".format(text)
+    return "C %s" % text
 
 
 if __name__ == "__main__":
-    app.run(host='0.0.0.0', port=5000)
+    app.run(host="0.0.0.0")
